@@ -12,7 +12,9 @@ function Scope() {
         this.$$watchers.push(watcher);
     };
     Scope.prototype.$digest = function() {
+        var self = this;
         _.forEach(this.$$watchers, function(watcher) {
+            watcher.watchFn(self);
             watcher.listenerFn();
         });
     };
